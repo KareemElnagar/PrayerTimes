@@ -73,8 +73,7 @@ dependencies {
     implementation ("org.osmdroid:osmdroid-android:6.1.16")
 
     // azan
-    implementation ("com.github.ahmedeltaher:Azan:3.0.0")
-    implementation("com.batoulapps.adhan:adhan2:0.0.5")
+
 
 
 
