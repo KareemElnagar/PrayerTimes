@@ -5,5 +5,10 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
+
     <style name="Theme.PrayerTimes" parent="Base.Theme.PrayerTimes" />
+
+    <style name="AppTheme.CustomFont" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:fontFamily">@font/tajawal_regular</item>
+    </style>
 </resources>

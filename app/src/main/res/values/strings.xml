@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PrayerTimes</string>
+    <string name="show_qibla_direction">Show Qibla Direction</string>
 </resources>
