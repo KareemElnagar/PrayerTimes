@@ -6,5 +6,5 @@ import com.kareem.prayertimes.domain.repo.repo
 import javax.inject.Inject
 
 class GetAllPrayersTimesUseCase @Inject constructor(private val repo: repo) {
-    suspend operator fun invoke(): LiveData<PrayerTimeRes> = repo.getAllPrayerTimes()
+      operator fun invoke(): LiveData<PrayerTimeRes> = repo.getAllPrayerTimes()
 }

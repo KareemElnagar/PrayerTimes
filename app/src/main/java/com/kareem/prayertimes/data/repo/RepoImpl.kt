@@ -22,7 +22,7 @@ class RepoImpl @Inject constructor(
     ): Response<PrayerTimeRes> = apiService.getPrayerTimes(year, month, latitude, longitude, method)
 
 
-    override suspend fun getAllPrayerTimes(): LiveData<PrayerTimeRes> = db.dao.getAllPrayerTimes()
+    override  fun getAllPrayerTimes(): LiveData<PrayerTimeRes> = db.dao.getAllPrayerTimes()
 
     override suspend fun getQiblaDirection(
         latitude: Double,

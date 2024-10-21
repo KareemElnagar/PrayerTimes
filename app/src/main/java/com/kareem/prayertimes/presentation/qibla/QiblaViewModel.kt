@@ -1,7 +1,10 @@
 package com.kareem.prayertimes.presentation.qibla
 
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class QiblaViewModel : ViewModel() {
+@HiltViewModel
+class QiblaViewModel @Inject constructor() : ViewModel() {
     // TODO: Implement the ViewModel
 }

@@ -15,7 +15,7 @@ interface repo {
         method: Int
     ): Response<PrayerTimeRes>
 
-    suspend fun getAllPrayerTimes(): LiveData<PrayerTimeRes>
+    fun getAllPrayerTimes(): LiveData<PrayerTimeRes>
     suspend fun getQiblaDirection(latitude: Double, longitude: Double): Response<QiblaResponse>
 
     suspend fun savePrayerTimes(response: PrayerTimeRes) : Long
