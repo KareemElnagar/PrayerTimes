@@ -50,9 +50,6 @@ class QiblaFragment : Fragment(), SensorEventListener {
     // sensor
     private lateinit var sensorManager: SensorManager
     private var rotationVectorSensor: Sensor? = null
-    private val rotationMatrix = FloatArray(9)
-    private val orientationValues = FloatArray(3)
-    private var currentAzimuth = 0f
 
     var lat = 0.0
     var long = 0.0
@@ -266,7 +263,6 @@ class QiblaFragment : Fragment(), SensorEventListener {
 
                     response.data?.let {
                         qiblaDirection = it.data.direction
-                        Log.d("test1254812452", "done")
 
                     }
                 }
@@ -274,20 +270,17 @@ class QiblaFragment : Fragment(), SensorEventListener {
                 is Resource.Error -> {
                     Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT)
                         .show()
-                    Log.d("test12548124", "done")
+
 
                 }
 
                 is Resource.Loading -> {
-                    Log.d("test125481", "done")
+
 
                 }
 
             }
         })
-        viewModel.qiblaDirection.observe(viewLifecycleOwner) {
-
-        }
 
 
     }
