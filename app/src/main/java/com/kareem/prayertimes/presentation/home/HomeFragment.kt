@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.location.Location
 import android.os.Build
-import androidx.fragment.app.viewModels
 import android.os.Bundle
 import android.preference.PreferenceManager
 import androidx.fragment.app.Fragment
@@ -14,8 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.kareem.prayertimes.R
 import com.kareem.prayertimes.data.model.PrayerTimeRes
@@ -32,11 +29,20 @@ import java.time.Month
 import java.util.Calendar
 import java.util.Locale
 
+
+import androidx.fragment.app.activityViewModels
+import kotlinx.coroutines.CoroutineScope
+
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+
+
 @RequiresApi(Build.VERSION_CODES.O)
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: HomeViewModel by activityViewModels()
     private lateinit var binding: FragmentHomeBinding
     private val currentDate = LocalDate.now()
     private var currentDay = currentDate.dayOfMonth
@@ -120,10 +126,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                 }
             }
-                viewModel.getAllPrayersTimes().observe(viewLifecycleOwner) { response ->
-                    if (response != null)
-                        prayersTimes = response
-                }
+            viewModel.getAllPrayersTimes().observe(viewLifecycleOwner) { response ->
+                if (response != null)
+                    prayersTimes = response
+            }
 
             viewModel.prayerTimes.observe(viewLifecycleOwner) {
                 if (firstTime == 0) {
@@ -198,9 +204,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
+    private var job: Job? = null
+
     @SuppressLint("SetTextI18n")
     fun startCountdown(totalSeconds: Long) {
-        lifecycleScope.launch(Dispatchers.Main) {
+        job = CoroutineScope(Dispatchers.Main).launch {
             for (seconds in totalSeconds downTo 0) {
                 val formattedTime = formatTime(seconds)
                 binding.tvCountdown.text = "Time Left \n $formattedTime"
@@ -210,7 +218,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    internal fun saveCountdownEndTime(context: Context, endTimeMillis: Long) {
+    private fun saveCountdownEndTime(context: Context, endTimeMillis: Long) {
         val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         preferences.edit().putLong(COUNTDOWN_TIME_KEY, endTimeMillis).apply()
     }

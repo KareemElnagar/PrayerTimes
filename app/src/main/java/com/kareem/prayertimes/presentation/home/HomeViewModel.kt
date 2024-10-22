@@ -1,7 +1,5 @@
 package com.kareem.prayertimes.presentation.home
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,14 +8,14 @@ import com.kareem.prayertimes.data.model.PrayerTimeRes
 import com.kareem.prayertimes.domain.usecase.PrayerUseCases
 import com.kareem.prayertimes.presentation.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val prayerUseCases: PrayerUseCases,
-    app: Application
-) : AndroidViewModel(app) {
+) : ViewModel() {
 
     private val _getPrayerTimeState = MutableLiveData<Resource<PrayerTimeRes>>()
     val getPrayerTimeState: LiveData<Resource<PrayerTimeRes>> = _getPrayerTimeState
@@ -89,7 +87,7 @@ class HomeViewModel @Inject constructor(
             try {
 
                 val response =
-                    prayerUseCases.getPrayerTimes(latitude,longitude,month,year,method)
+                    prayerUseCases.getPrayerTimes(year, month, latitude, longitude, method)
                 _getPrayerTimeState.value = getPrayerTimeHandler(response)
 
             } catch (t: Throwable) {
@@ -115,7 +113,7 @@ class HomeViewModel @Inject constructor(
 
     // cashing
     fun saveAllPrayersTimes(response: PrayerTimeRes) =
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             prayerUseCases.savePrayerTimesUseCase(response)
 
         }
@@ -127,7 +125,7 @@ class HomeViewModel @Inject constructor(
     }
 
     fun deleteAll() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             prayerUseCases.deletePrayerTimesUseCase()
         }
     }

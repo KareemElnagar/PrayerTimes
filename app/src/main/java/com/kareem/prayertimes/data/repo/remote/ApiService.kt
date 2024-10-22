@@ -9,7 +9,7 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-    @GET("calender/{year}/{month}")
+    @GET("calendar/{year}/{month}")
     suspend fun getPrayerTimes(
         @Path("year") year: Int,
         @Path("month") month: Int,

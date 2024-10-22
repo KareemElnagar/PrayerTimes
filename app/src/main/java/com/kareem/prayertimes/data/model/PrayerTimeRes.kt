@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 )
 data class PrayerTimeRes(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    var id: Int? = null,
     val code: Int,
     val data: List<Data>,
     val status: String

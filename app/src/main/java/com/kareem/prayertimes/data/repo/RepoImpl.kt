@@ -14,10 +14,10 @@ class RepoImpl @Inject constructor(
     private val db: PrayerDatabase
 ): repo {
     override suspend fun getPrayerTimes(
-        latitude: Double,
-        longitude: Double,
         year: Int,
         month: Int,
+        latitude: Double,
+        longitude: Double,
         method: Int
     ): Response<PrayerTimeRes> = apiService.getPrayerTimes(year, month, latitude, longitude, method)
 

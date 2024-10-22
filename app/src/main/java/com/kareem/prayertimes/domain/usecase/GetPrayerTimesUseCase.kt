@@ -7,12 +7,12 @@ import javax.inject.Inject
 
 class GetPrayerTimesUseCase @Inject constructor(private val repo: repo) {
     suspend operator fun invoke(
+        year: Int,
+        month: Int,
         latitude: Double,
         longitude: Double,
-        month: Int,
-        year: Int,
         method: Int
-    ): Response<PrayerTimeRes> = repo.getPrayerTimes(latitude, longitude, month, year, method)
+    ): Response<PrayerTimeRes> = repo.getPrayerTimes(year,month,latitude,longitude,method)
 
 
 }

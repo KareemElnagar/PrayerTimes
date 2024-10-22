@@ -9,7 +9,7 @@ import com.kareem.prayertimes.data.model.PrayerTimeRes
 
 @Database(
     entities = [PrayerTimeRes::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

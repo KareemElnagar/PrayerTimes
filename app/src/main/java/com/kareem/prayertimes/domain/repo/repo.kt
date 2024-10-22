@@ -8,10 +8,10 @@ import retrofit2.Response
 interface repo {
 
     suspend fun getPrayerTimes(
-        latitude: Double,
-        longitude: Double,
         year: Int,
         month: Int,
+        latitude: Double,
+        longitude: Double,
         method: Int
     ): Response<PrayerTimeRes>
 

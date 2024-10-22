@@ -1,5 +1,6 @@
 package com.kareem.prayertimes.di
 
+import android.app.Application
 import com.kareem.prayertimes.data.repo.RepoImpl
 import com.kareem.prayertimes.data.repo.local.PrayerDatabase
 import com.kareem.prayertimes.data.repo.remote.ApiService
@@ -18,7 +19,8 @@ object RepoModule {
     @Singleton
     fun provideRepository(
         api: ApiService,
-        db: PrayerDatabase
+        db: PrayerDatabase,
+        app: Application
     ): repo {
         return RepoImpl(api,db)
 
