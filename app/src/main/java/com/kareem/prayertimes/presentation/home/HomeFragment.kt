@@ -203,7 +203,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         lifecycleScope.launch(Dispatchers.Main) {
             for (seconds in totalSeconds downTo 0) {
                 val formattedTime = formatTime(seconds)
-                binding.tvCountdown.text = "          Time Left \n $formattedTime"
+                binding.tvCountdown.text = "Time Left \n $formattedTime"
                 delay(1000)
             }
             binding.tvCountdown.text = "Countdown finished for today will start at 12 am"

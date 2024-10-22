@@ -77,7 +77,7 @@ class QiblaFragment : Fragment(), SensorEventListener {
     ): View {
         binding = FragmentQiblaBinding.inflate(inflater, container, false)
         map = binding.map
-        map.setTileSource(TileSourceFactory.MAPNIK)
+        map.setTileSource(TileSourceFactory.USGS_TOPO)
         mapController = map.controller
         map.setMultiTouchControls(true)
         sensorManager = requireActivity().getSystemService(Context.SENSOR_SERVICE) as SensorManager

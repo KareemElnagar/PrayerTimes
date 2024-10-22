@@ -1,5 +1,7 @@
 package com.kareem.prayertimes.presentation.home
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,8 +15,9 @@ import retrofit2.Response
 import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val prayerUseCases: PrayerUseCases
-) : ViewModel() {
+    private val prayerUseCases: PrayerUseCases,
+    app: Application
+) : AndroidViewModel(app) {
 
     private val _getPrayerTimeState = MutableLiveData<Resource<PrayerTimeRes>>()
     val getPrayerTimeState: LiveData<Resource<PrayerTimeRes>> = _getPrayerTimeState
